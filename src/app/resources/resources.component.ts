@@ -50,7 +50,7 @@ import { FormAndFrameworkUtilService } from '@app/services/formandframeworkutil.
 import { Environment, InteractSubtype, InteractType, PageId, ImpressionType, ImpressionSubtype } from '@app/services/telemetry-constants';
 import { AppHeaderService } from '@app/services/app-header.service';
 import { SplaschreenDeeplinkActionHandlerDelegate } from '@app/services/sunbird-splashscreen/splaschreen-deeplink-action-handler-delegate';
-
+import {LibraryFiltersLayout} from '@project-sunbird/common-consumption';
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
@@ -102,6 +102,11 @@ export class ResourcesComponent implements OnInit, AfterViewInit {
   recentlyViewedResources: Array<any>;
   userId: string;
   showLoader = false;
+
+  // common consumption starts
+  mediumFilterLayout = LibraryFiltersLayout.SQUARE;
+  classFilterLayout = LibraryFiltersLayout.ROUND;
+  // common consumption ends
 
   /**
    * Flag to show latest and popular course loader
@@ -941,7 +946,10 @@ export class ResourcesComponent implements OnInit, AfterViewInit {
     }
   }
 
-  navigateToDetailPage(item, index, sectionName) {
+  navigateToDetailPage(event) {
+    const item = event.data;
+    const index = event.index;
+
     const identifier = item.contentId || item.identifier;
     let telemetryObject: TelemetryObject;
     telemetryObject = new TelemetryObject(identifier, item.contentType, undefined);

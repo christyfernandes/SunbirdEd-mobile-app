@@ -17,6 +17,8 @@
           {{grade?.name}}</div>
       </div>
     </div>
+    <!-- <sb-library-filters [list]="categoryMediums" [layout]="mediumFilterLayout"></sb-library-filters>
+    <sb-library-filters [list]="categoryGradeLevels" [layout]="classFilterLayout"></sb-library-filters> -->
   </div>
   <div class="scrollable-container">
     <ion-refresher (ionRefresh)="swipeDownToRefresh($event)"></ion-refresher>
@@ -71,7 +73,7 @@
 
     <div *ngFor="let items of storyAndWorksheets">
       <div class="sb-textbook-container" *ngIf="items?.contents && items?.contents?.length">
-        <div class="sb-textbook-items">
+        <!-- <div class="sb-textbook-items">
           <div class="sb-textbook-title-container">
             <span class="textbook-icon">
               <ion-icon ios="ios-albums" md="md-albums"></ion-icon>
@@ -80,7 +82,6 @@
               {{items.name}}
             </span>
           </div>
-          <!-- Card style -->
           <div class="sb-card-container sb-card-textbook-container">
             <div class="sb-card-textbook" *ngFor="let item of items?.contents | slice:0:3 ; let i = index">
               <app-text-book-card [content]="item" [layoutName]='layoutName'
@@ -89,7 +90,11 @@
             <div class="sb-view-more" *ngIf="items?.contents?.length > 3"
               (click)="navigateToTextbookPage(items?.contents, items.name)">{{'VIEW_MORE' | translate}}</div>
           </div>
-        </div>
+        </div> -->
+        <sb-library-cards-stack [title]="items?.name" [contentList]="items?.contents"
+            [viewMoreButtonText]="'VIEW_MORE' | translate" [maxCardCount]="3"
+            (buttonClick)="navigateToTextbookPage(items?.contents, items.name)" (cardClick)="navigateToDetailPage($event)">
+        </sb-library-cards-stack>
       </div>
     </div>
     <div class="sb-explore-container" *ngIf="storyAndWorksheets && storyAndWorksheets.length !== 0">

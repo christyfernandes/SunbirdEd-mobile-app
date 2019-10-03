@@ -48,10 +48,12 @@
             "styles": [
               {
                 "input": "src/global.scss"
-              }
+              },
+              "./node_modules/common-consumption-styles/assets/_styles.scss"
             ],
             "scripts": [],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "preserveSymlinks": true
           },
           "configurations": {
             "production": {
